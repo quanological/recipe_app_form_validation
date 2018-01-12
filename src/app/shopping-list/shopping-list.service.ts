@@ -13,6 +13,10 @@ export class ShoppingListService {
     return this.ingredients.slice();
   }
 
+  getIngredient(index: number) {
+    return this.ingredients[index];
+  }
+
   addIngredient(ingredient: Ingredient) {
     this.ingredients.push(ingredient);
     this.ingredientsChanged.next(this.ingredients.slice());
@@ -23,6 +27,13 @@ export class ShoppingListService {
     //   this.addIngredient(ingredient);
     // }
     this.ingredients.push(...ingredients);
+    this.ingredientsChanged.next(this.ingredients.slice());
+  }
+
+  updateItem(index: number, ingredient: Ingredient) {
+    // change element at the given index with the new edited ingredient
+    this.ingredients[index] = ingredient;
+    // emit the new array to the ingredientschanged subject
     this.ingredientsChanged.next(this.ingredients.slice());
   }
 }
